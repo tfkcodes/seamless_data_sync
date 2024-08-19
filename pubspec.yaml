@@ -1,6 +1,6 @@
 name: seamless_data_sync
-description: "A Flutter package for displaying toast messages."
-version: 0.0.13
+description: "Flutter package designed to handle data synchronization between local storage and remote servers in offline-first applications. It provides seamless sync capabilities with conflict resolution, ensuring that users can work offline and have their data automatically synced once they regain connectivity"
+version: 0.0.11
 homepage: https://github.com/tfkcodes/seamless_data_sync
 
 environment:

@@ -5,7 +5,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.0] - 2024-08-19
+## [0.0.11] - 2024-08-19
 ### Added
 - Initial release of Seamless Data Sync.
 - Two-way data synchronization between local storage and remote servers.
