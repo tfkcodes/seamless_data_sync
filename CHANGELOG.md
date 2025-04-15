@@ -5,8 +5,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.0.11] - 2024-08-19
+## [0.0.12] - 2024-15-04
+
 ### Added
+
 - Initial release of Seamless Data Sync.
 - Two-way data synchronization between local storage and remote servers.
 - Basic conflict resolution with `lastWriteWins` strategy.
@@ -14,3 +16,4 @@ All notable changes to this project will be documented in this file.
 - Network monitoring and background sync capabilities.
 - Event handling for sync operations.
 - Developer-friendly API with customizable sync intervals.
+```
