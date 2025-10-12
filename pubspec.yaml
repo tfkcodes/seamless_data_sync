@@ -28,12 +28,7 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      android:
-        package: com.tfkpackages.seamless_data_sync
-        pluginClass: seamless_data_sync
-      ios:
-        pluginClass: seamless_data_sync
-
+      dart-only: true
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

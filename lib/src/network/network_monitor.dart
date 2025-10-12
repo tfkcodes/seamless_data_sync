@@ -1,24 +1,35 @@
 import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-import '../../seamless_data_sync.dart';
-
+/// Small network monitor that emits boolean online status.
+/// For simplicity: online when connectivity != none.
 class NetworkMonitor {
-  final Connectivity _connectivity = Connectivity();
-  final SeamlessDataManager seamlessDataManager;
-  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+  final Connectivity _connectivity;
+  final StreamController<bool> _controller = StreamController.broadcast();
+  StreamSubscription<ConnectivityResult>? _sub;
 
-  NetworkMonitor(this.seamlessDataManager) {
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen((result) {
-      // ignore: unrelated_type_equality_checks
-      if (result != ConnectivityResult.none) {
-        seamlessDataManager.sync();
-      }
-    });
+  NetworkMonitor({Connectivity? connectivity})
+      : _connectivity = connectivity ?? Connectivity();
+
+  Stream<bool> get onStatusChanged => _controller.stream;
+
+  Future<void> start() async {
+    // initial status
+    final result = await _connectivity.checkConnectivity();
+    _controller.add(_isOnline(result as ConnectivityResult));
+
+    _sub = _connectivity.onConnectivityChanged.listen((res) {
+      _controller.add(_isOnline(res as ConnectivityResult));
+    }) as StreamSubscription<ConnectivityResult>?;
   }
 
-  void dispose() {
-    _connectivitySubscription.cancel();
+  bool _isOnline(ConnectivityResult r) {
+    return r != ConnectivityResult.none;
+  }
+
+  Future<void> stop() async {
+    await _sub?.cancel();
+    await _controller.close();
   }
 }
